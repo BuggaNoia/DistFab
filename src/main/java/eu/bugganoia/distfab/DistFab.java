@@ -67,18 +67,13 @@ public class DistFab
     				? "(null)"
     				: ( _proxy.IsRemote() ? "true" : "false" ) ) ); 
     	
-    	if( _proxy != null && !_proxy.IsRemote() )
+    	if( _proxy != null )
     	{
-    		_logger.info( "Minecraft.getMinecraft() will crash ? " );
-    		
-    		// $TODO --> ClientProxy.java
-	    	/*
-    		World world = Minecraft.getMinecraft().world;
+    		Boolean isWorldRemote = _proxy.IsWorldRemote();
 	    	_logger.info( "world.isRemote=" 
-	    			+ ( world == null  
+	    			+ (  isWorldRemote == null  
 						? "(null)"
-						: ( world.isRemote  ? "true" : "false" ) ) );
-	    	*/
+						: ( isWorldRemote  ? "true" : "false" ) ) );
     	}
     }
 }
