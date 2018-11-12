@@ -71,6 +71,7 @@ public class DistFab
     	{
     		_logger.info( "Minecraft.getMinecraft() will crash ? " );
     		
+    		// $TODO --> ClientProxy.java
 	    	/*
     		World world = Minecraft.getMinecraft().world;
 	    	_logger.info( "world.isRemote=" 
