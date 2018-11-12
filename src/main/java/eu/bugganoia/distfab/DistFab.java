@@ -60,7 +60,6 @@ public class DistFab
 
     protected void LogSiding()
     {
-
     	// Side Test
     	_logger.info( "_proxy.isRemote=" 
     			+ ( _proxy == null 
