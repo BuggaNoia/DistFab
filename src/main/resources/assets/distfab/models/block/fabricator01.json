@@ -1,0 +1,11 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "up": "distfab:blocks/fabricator01_side",
+        "down": "distfab:blocks/fabricator01_side",
+        "north": "distfab:blocks/fabricator01_front_off",
+        "east": "distfab:blocks/fabricator01_side",
+        "south": "distfab:blocks/fabricator01_side",
+        "west": "distfab:blocks/fabricator01_side"
+    }
+}

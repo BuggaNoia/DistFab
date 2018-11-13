@@ -1,7 +1,9 @@
 package eu.bugganoia.distfab.util.handlers;
 
+import eu.bugganoia.distfab.init.BlockInit;
 import eu.bugganoia.distfab.init.ItemInit;
 import eu.bugganoia.distfab.util.interfaces.IHasModel;
+import net.minecraft.block.Block;
 
 // import com.jcraft.jorbis.Block;
 
@@ -26,17 +28,16 @@ public class RegistryHandler
 		event.getRegistry().registerAll( ItemInit.ITEMS.toArray( new Item[0] ) );
 	}
 	
-	/*
 	@SubscribeEvent
 	public static void onBlockregister( RegistryEvent.Register<Block> event )
 	{
 		event.getRegistry().registerAll(BlockInit.BLOCKS.toArray( new Block[0] ) );
+		
 		/*
 		TileEntityHandler.registerTileEntities();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCopperChest.class, new RenderCopperChest());
-		*\
+		*/
 	}
-	*/
 	
 	/*
 	@SubscribeEvent
@@ -59,7 +60,6 @@ public class RegistryHandler
 			}
 		}
 		
-		/*
 		for( Block block : BlockInit.BLOCKS )
 		{
 			if( block instanceof IHasModel )
@@ -67,7 +67,6 @@ public class RegistryHandler
 				( (IHasModel) block ).registerModels();
 			}
 		}
-		*/
 	}
 	
 	public static void preInit( FMLPreInitializationEvent event )
