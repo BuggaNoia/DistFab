@@ -29,7 +29,7 @@ public class RegistryHandler
 	}
 	
 	@SubscribeEvent
-	public static void onBlockregister( RegistryEvent.Register<Block> event )
+	public static void onBlockRegister( RegistryEvent.Register<Block> event )
 	{
 		event.getRegistry().registerAll(BlockInit.BLOCKS.toArray( new Block[0] ) );
 		

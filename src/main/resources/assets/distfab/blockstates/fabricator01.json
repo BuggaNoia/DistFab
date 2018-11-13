@@ -1,9 +1,11 @@
 {
     "variants":
     {
-        "normal":
-        {
-            "model": "distfab:fabricator01"
-        }
+        "normal": { "model": "distfab:fabricator01" },
+    
+        "facing=north": { "model": "distfab:fabricator01" },
+        "facing=east": { "model": "distfab:fabricator01", "y": 90 },
+        "facing=south": { "model": "distfab:fabricator01", "y": 180 },
+        "facing=west": { "model": "distfab:fabricator01", "y": 270 }
     }
 }
