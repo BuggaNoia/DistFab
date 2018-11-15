@@ -3,10 +3,9 @@ package eu.bugganoia.distfab.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.bugganoia.distfab.blocks.BlockBase;
+// import eu.bugganoia.distfab.blocks.BlockBase;
 import eu.bugganoia.distfab.blocks.BlockFabricator;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 
 

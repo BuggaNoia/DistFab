@@ -7,7 +7,7 @@ import net.minecraft.block.Block;
 
 // import com.jcraft.jorbis.Block;
 
-import net.minecraft.enchantment.Enchantment;
+// import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;

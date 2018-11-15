@@ -23,6 +23,11 @@ public class DistFab
 	// --- Singleton
     @Instance( Reference.MOD_ID )
     private static DistFab _instance;
+    
+    public static DistFab getInstance()
+    {
+    	return _instance;
+    }
 
     
     // --- Helper

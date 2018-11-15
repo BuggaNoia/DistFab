@@ -2,6 +2,7 @@ package eu.bugganoia.distfab.blocks;
 
 import eu.bugganoia.distfab.blocks.tileentities.TileEntityFabricator;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -11,27 +12,33 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+// import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumBlockRenderType;
+// import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 
-public class BlockFabricator extends BlockBase
+public class BlockFabricator extends BlockBase implements ITileEntityProvider
 {
+	// --- Members
 	// TODO: --> BlockFaced.FACING
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
-	
+	// TODO: --> BlockState.ACTIVE
 	public static final PropertyBool BURNING = PropertyBool.create( "burning" );
 	
 	protected int _number;
 
 	
+	// --- Constructor, Prop-Overloads
 	public BlockFabricator( int number, String name ) 
 	{
 		super( name, Material.IRON, CreativeTabs.BUILDING_BLOCKS  );
@@ -55,14 +62,53 @@ public class BlockFabricator extends BlockBase
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state) 
+	public EnumBlockRenderType getRenderType( IBlockState state ) 
 	{
 		return EnumBlockRenderType.MODEL;
 	}
 	
 	
+	// --- TEST
+	@Override
+	public boolean onBlockActivated(
+			World worldIn, BlockPos pos, 
+			IBlockState state, EntityPlayer playerIn, 
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ ) 
+	{
+		if( !worldIn.isRemote && playerIn != null )
+		{
+			if( playerIn != null )
+			{
+				/*playerIn.openGui( DistFab.getInstance(), GuiInit.GUI_Fabricator, worldIn, 
+					pos.getX(), pos.getY(), pos.getZ() ); */
+				
+				playerIn.sendMessage( new TextComponentString( 
+					String.format( "BLOCKCLASS: number: %d"
+										/* + ", facing: %s, burning: %s"*/ ,
+						_number /*, 
+						getBlockState().getBaseState().getValue( FACING ).toString(), 
+						getBlockState().getBaseState().getValue( BURNING ).toString() */
+					) ) );
+			}
+			
+			TileEntity tileEntity = worldIn.getTileEntity( pos );
+			if( tileEntity != null && tileEntity instanceof TileEntityFabricator ) 
+			{
+				TileEntityFabricator tileEntityFabricator = (TileEntityFabricator) tileEntity;
+				
+				playerIn.sendMessage( new TextComponentString( 
+					String.format( "TILEENTITY: number: %d, facing: %s",
+						tileEntityFabricator.getNumber(), 
+						tileEntityFabricator.getState().getValue( FACING ).toString() ) ) );
+			}
+		}
+		
+		return true;
+	}	
 	
-	// TODO: --> BlockStated.setState()
+	
+	// --- Stated-Block
+	// TODO: --> BlockStated.setState(), List<IProperty> this._properties;
 	@Override
 	protected BlockStateContainer createBlockState() 
 	{
@@ -97,19 +143,21 @@ public class BlockFabricator extends BlockBase
 		//if(active) worldIn.setBlockState(pos, BlockInit.SINTERING_FURNACE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, true), 3);
 		//else worldIn.setBlockState(pos, BlockInit.SINTERING_FURNACE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, false), 3);
 		
-		TileEntity tileentity = worldIn.getTileEntity( pos );
-		if( tileentity != null ) 
+		TileEntity tileEntity = worldIn.getTileEntity( pos );
+		if( tileEntity != null ) 
 		{
-			tileentity.validate();
-			worldIn.setTileEntity( pos, tileentity );
+			tileEntity.validate();
+			worldIn.setTileEntity( pos, tileEntity );
 		}
 	}
 	
 	
+	// --- Faced-Block
 	// TODO: --> BlockFaced.getStateForPlacement()
 	@Override
 	public IBlockState getStateForPlacement( 
-		World world, BlockPos pos, EnumFacing facing, 
+		World worldIn, BlockPos pos, 
+		EnumFacing facing, 
 		float hitX, float hitY, float hitZ, int meta, 
 		EntityLivingBase placer, EnumHand hand ) 
 	{
@@ -179,17 +227,25 @@ public class BlockFabricator extends BlockBase
 	}
 	
 	
-	// TODO: --> BlockWithTileEntity
+	// --- ITileEntityProvider
+	// TODO: --> BlockTileEntityProvider
 	@Override
 	public boolean hasTileEntity( IBlockState state ) 
 	{
 		return true;
 	}
 	
-	// TODO: --> BlockWithTileEntity
+	// TODO: --> BlockTileEntityProvider
 	@Override
-	public TileEntity createTileEntity( World world, IBlockState state ) 
+	public TileEntity createTileEntity( World worldIn, IBlockState state ) 
 	{
-		return new TileEntityFabricator( /*_number*/ );
+		return new TileEntityFabricator( _number, state );
+	}
+
+	// TODO: --> BlockTileEntityProvider
+	@Override
+	public TileEntity createNewTileEntity( World worldIn, int meta ) 
+	{
+		return new TileEntityFabricator( _number, getStateFromMeta( meta ) );
 	}
 }
