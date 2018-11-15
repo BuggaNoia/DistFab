@@ -22,7 +22,7 @@ public class ItemBase extends Item implements IHasModel
 	
 	// --- Register
 	@Override
-	public void registerModels() 
+	public void registerModel() 
 	{
 		DistFab.registerModel( this, 0, "inventory" );
 	}

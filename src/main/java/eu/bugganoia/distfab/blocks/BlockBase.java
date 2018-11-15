@@ -14,7 +14,7 @@ import net.minecraft.item.ItemBlock;
 public class BlockBase extends Block implements IHasModel
 {
 	// --- Constructor
-	public BlockBase(String name, Material material, CreativeTabs tab ) 
+	public BlockBase( String name, Material material, CreativeTabs tab ) 
 	{
 		super( material );
 		
@@ -29,7 +29,7 @@ public class BlockBase extends Block implements IHasModel
 	
 	// --- Register
 	@Override
-	public void registerModels() 
+	public void registerModel() 
 	{
 		DistFab.registerModel( Item.getItemFromBlock( this ), 0, "inventory" );
 	}

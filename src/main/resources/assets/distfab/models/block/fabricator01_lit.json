@@ -5,7 +5,7 @@
         "particle": "distfab:blocks/fabricator01_side",
         "up": "distfab:blocks/fabricator01_side",
         "down": "distfab:blocks/fabricator01_side",
-        "north": "distfab:blocks/fabricator01_front_off",
+        "north": "distfab:blocks/fabricator01_front_on",
         "east": "distfab:blocks/fabricator01_side",
         "south": "distfab:blocks/fabricator01_side",
         "west": "distfab:blocks/fabricator01_side"
