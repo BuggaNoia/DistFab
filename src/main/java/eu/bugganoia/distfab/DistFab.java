@@ -1,8 +1,14 @@
 package eu.bugganoia.distfab;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -14,7 +20,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import eu.bugganoia.distfab.proxy.CommonProxy;
 import eu.bugganoia.distfab.reference.Reference;
 import eu.bugganoia.distfab.util.DfLog;
+import eu.bugganoia.distfab.util.handlers.PlayerHandler;
 import eu.bugganoia.distfab.util.handlers.RegistryHandler;
+
 
 
 @Mod( modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION )
@@ -32,6 +40,7 @@ public class DistFab
     
     // --- Helper
     protected static DfLog _logger;
+    public static DfLog getLogger() { return _logger; }
 
     
     // --- Proxy
@@ -60,6 +69,7 @@ public class DistFab
     	_logger.info( Reference.MOD_NAME + " v" + Reference.VERSION + ": preInit()" );
     	LogSiding();
     	
+    	MinecraftForge.EVENT_BUS.register( new PlayerHandler() );
     	
     	// --- Delegate
     	// _proxy.preInit( event );
